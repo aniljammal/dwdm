@@ -1,0 +1,19 @@
+data <- data.frame(
+  a = c("1-5", "5-15", "15-20", "20-50", "50-80", "80-110"),
+  f = c(200, 450, 300, 1500, 700, 44)
+)
+
+data$cumulative_f <- cumsum(data$f)
+total_f <- sum(data$f)
+m <- total_f / 2
+me <- data$a[which(data$cumulative_f >= m)[1]]
+med <- as.numeric(strsplit(me, "-")[[1]])
+ml <- med[1]
+mu <- med[2]
+mw <- mu - ml
+mc <- data$cumulative_f[which(data$a == me) - 1]
+medi <- data$f[which(data$a == me)]
+
+median <- ml + ((m - mc) / medi) * mw
+print(paste("Approximate median value:", median))
+
