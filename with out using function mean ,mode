@@ -1,0 +1,14 @@
+data <- data.frame(
+  age = c("1-5", "5-15", "15-20", "20-50", "50-80", "80-110"),
+  frequency = c(200, 450, 300, 1500, 700, 44)
+)
+midpoints <- numeric(length(data$age))
+for (i in seq_along(data$age)) {
+  age_range <- as.numeric(unlist(strsplit(data$age[i], "-")))
+  midpoints[i] <- mean(age_range)
+}
+mean_value <- sum(midpoints * data$frequency) / sum(data$frequency)
+mode_index <- which.max(data$frequency)
+mode_value <- midpoints[mode_index]
+print(paste("Mean:", mean_value))
+print(paste("Mode:", mode_value))
